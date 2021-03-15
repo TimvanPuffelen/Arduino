@@ -32,3 +32,14 @@ For inline code, use `\lstinline`:
 ```
 To write words \lstinline{void} from the code inline.
 ```
+
+# Margin figure
+
+```
+\marginfigure[#1][#2]{#3}
+```
+
+- #1: optional, vertical space on top (0 as default)
+- #2: optional, width of the image in terms of percentage of the margin width (1 is the default, 100%)
+- #3: mandatory, the file name
+
