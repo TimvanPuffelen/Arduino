@@ -6,18 +6,28 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}%[2018/04/01]
-\ProvidesClass{arduino}[2021/03/10 v1.0 LaTeX class for Boswell Arduino documents]%
-\LoadClass{article}
-\RequirePackage{ifxetex}
+\ProvidesClass{arduino}[2021/03/15 v0.2 LaTeX class for Boswell Arduino documents]%
+\LoadClass[oneside]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \RequirePackage{ifxetex}
+    \RequirePackage{etoolbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Layout
-\RequirePackage{geometry}
-\geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{\baselineskip}
+    \RequirePackage{geometry}
+    % Paper A4 210×297 mm   margin 2cm
+    \geometry{a4paper,
+        top=2cm,
+        bottom=2cm,
+        left=2cm,
+        right=85mm,
+        marginparwidth=60mm,%
+        marginparsep=5mm,%
+    }
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{\baselineskip}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sectioning
-\setcounter{secnumdepth}{0}
+    \setcounter{secnumdepth}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Fonts
     \RequirePackage{anyfontsize}
@@ -100,12 +110,18 @@
     \lstset{style=myArduino}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Other packages
-\RequirePackage{amsmath}
-\RequirePackage{graphicx}
-\RequirePackage{booktabs}
-\RequirePackage{siunitx}
-\RequirePackage{enumitem}
-\RequirePackage{wrapfig}
+    \RequirePackage{amsmath}
+    \RequirePackage{graphicx}
+    \RequirePackage{booktabs}
+    \RequirePackage{siunitx}
+    \RequirePackage{enumitem}
+    \RequirePackage{wrapfig}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Margin
+    \RequirePackage{mparhack}
+    \NewDocumentCommand{\marginfigure}{O{0pt} O{1} m}{\marginpar{\vspace{#1}\centering\includegraphics[width=#2\linewidth]{#3}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \AfterEndPreamble{\raggedright}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \endinput
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
