@@ -25,6 +25,9 @@
     }
     \setlength{\parindent}{0pt}
     \setlength{\parskip}{\baselineskip}
+
+    \newlength{\widemargin}
+    \setlength{\widemargin}{\dimexpr(\textwidth+60mm)\relax}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sectioning
     \setcounter{secnumdepth}{0}
@@ -108,14 +111,39 @@
         rulesepcolor=\color{arduinoBlue},
     }
     \lstset{style=myArduino}
+
+    \newbox\marginlst
+    \newlength\marginlstoffset
+    % framerule + framesep + rulesep:
+    \setlength\marginlstoffset{\dimexpr2mm+3pt+2pt\relax}
+
+    \lstnewenvironment{marginlisting}
+      {%
+        \lstset{style=myArduino ,
+          % basicstyle = \small\ttfamily,
+          % frame = leftline ,
+          % framerule = 2mm ,
+          % rulecolor = \color{black!20},
+          breaklines = true ,
+          linewidth = \dimexpr\marginparwidth-\marginlstoffset\relax
+        }%
+        \setbox\marginlst\hbox\bgroup
+      }
+      {%
+        \egroup
+        % or \marginnote:
+        \marginpar{\hspace*{\marginlstoffset}\unhbox\marginlst}%
+      }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Other packages
     \RequirePackage{amsmath}
     \RequirePackage{graphicx}
     \RequirePackage{booktabs}
+    \RequirePackage{longtable}
     \RequirePackage{siunitx}
     \RequirePackage{enumitem}
     \RequirePackage{wrapfig}
+    \RequirePackage{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Margin
     \RequirePackage{mparhack}
