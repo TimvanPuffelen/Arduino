@@ -6,28 +6,33 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}%[2018/04/01]
-\ProvidesClass{arduino}[2021/03/15 v0.2 LaTeX class for Boswell Arduino documents]%
+\ProvidesClass{arduino}[2021/03/16 v0.3 LaTeX class for Boswell Arduino documents]%
 \LoadClass[oneside]{article}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \RequirePackage{ifxetex}
     \RequirePackage{etoolbox}
+    \RequirePackage{calc}
+    \RequirePackage{changepage}
+    \RequirePackage{environ}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Layout
     \RequirePackage{geometry}
     % Paper A4 210×297 mm   margin 2cm
+    \newlength{\RM}\setlength{\RM}{60mm}
+    \newlength{\RMsep}\setlength{\RMsep}{5mm}
+    \newlength{\Margin}\setlength{\Margin}{20mm}
     \geometry{a4paper,
-        top=2cm,
-        bottom=2cm,
-        left=2cm,
-        right=85mm,
-        marginparwidth=60mm,%
-        marginparsep=5mm,%
+        top=\Margin,
+        bottom=\Margin,
+        left=\Margin,
+        right={\Margin+\RM+\RMsep},
+        marginparwidth=\RM,%
+        marginparsep=\RMsep,%
     }
     \setlength{\parindent}{0pt}
     \setlength{\parskip}{\baselineskip}
-
     \newlength{\widemargin}
-    \setlength{\widemargin}{\dimexpr(\textwidth+60mm)\relax}
+    \setlength{\widemargin}{\paperwidth-\Margin-\Margin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sectioning
     \setcounter{secnumdepth}{0}
@@ -111,12 +116,10 @@
         rulesepcolor=\color{arduinoBlue},
     }
     \lstset{style=myArduino}
-
     \newbox\marginlst
     \newlength\marginlstoffset
     % framerule + framesep + rulesep:
     \setlength\marginlstoffset{\dimexpr2mm+3pt+2pt\relax}
-
     \lstnewenvironment{marginlisting}
       {%
         \lstset{style=myArduino ,
@@ -144,6 +147,21 @@
     \RequirePackage{enumitem}
     \RequirePackage{wrapfig}
     \RequirePackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Widebox
+    \newenvironment{widebox}{\begin{adjustwidth}{0pt}{-\RM-\RMsep}\raggedright}{\end{adjustwidth}}
+    \newlength{\miniboxsep}\setlength{\miniboxsep}{\RMsep}
+    \newlength{\miniboxL}\newlength{\miniboxR}
+    \NewEnviron{leftrightbox}[2][0.5]{%
+        \setlength{\miniboxL}{#1\linewidth}%
+        \setlength{\miniboxR}{\linewidth-\miniboxL-\miniboxsep}%
+        \begin{minipage}{\miniboxL}\setlength{\parskip}{\baselineskip}\raggedright\BODY\end{minipage}%
+        \hspace{\miniboxsep}%
+        \begin{minipage}{\miniboxR}#2\end{minipage}
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Alpha list
+    \newenvironment{alphalist}{\begin{enumerate}[label={\alph*})]}{\end{enumerate}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Margin
     \RequirePackage{mparhack}

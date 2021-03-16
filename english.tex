@@ -5,37 +5,40 @@
 
 \begin{document}
 
-\includegraphics[width=6cm]{1. Arduino}
+\includegraphics[width=\linewidth]{1. Arduino}
 
 \textbf{Requirements for this module}
 
-\begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
-\textbf{Offline} & \textbf{Online}\\
-Arduino & --- \\
-Breadboard & --- \\
-Jumper cables & --- \\
-Resistors (\SI{220}{\ohm}; \SI{330}{\ohm}; \SI{1}{\kilo\ohm}; \SI{10}{\kilo\ohm}) & --- \\
-Potentiometer (\SI{1}{\kilo\ohm}; \SI{10}{\kilo\ohm}) & --- \\
-Diode & --- \\
-2x LDR & --- \\
-LED (red, yellow, green) & --- \\
-RGB LED & --- \\
-Servo motor & --- \\
-DC Motor & --- \\
-5x Push button & --- \\
-2N2222 transistor & --- \\
-LCD & --- \\
-Active piezo element & --- \\
+\begin{tabular}{
+    @{}>{\raggedright\arraybackslash}p{0.5\linewidth-\tabcolsep}
+    >{\raggedright\arraybackslash}p{0.5\linewidth-\tabcolsep}@{}
+}
+\textbf{Offline}                                                                  & \textbf{Online} \\
+Arduino                                                                           & ---             \\
+Breadboard                                                                        & ---             \\
+Jumper cables                                                                     & ---             \\
+Resistors (\SI{220}{\ohm}; \SI{330}{\ohm}; \SI{1}{\kilo\ohm}; \SI{10}{\kilo\ohm}) & ---             \\
+Potentiometer (\SI{1}{\kilo\ohm}; \SI{10}{\kilo\ohm})                             & ---             \\
+Diode                                                                             & ---             \\
+2x LDR                                                                            & ---             \\
+LED (red, yellow, green)                                                          & ---             \\
+RGB LED                                                                           & ---             \\
+Servo motor                                                                       & ---             \\
+DC Motor                                                                          & ---             \\
+5x Push button                                                                    & ---             \\
+2N2222 transistor                                                                 & ---             \\
+LCD                                                                               & ---             \\
+Active piezo element                                                              & ---             \\
 \end{tabular}
 
 \textbf{Prerequisite knowledge}
 
-\begin{tabular}{ll}
-Ohm's law & $R = \dfrac{U}{I}$\\
-Components in series & equal current \\
-Components in parrallel & equal voltage \\
-Power & $P = U \cdot I = I^2 \cdot R$ \\
-\multicolumn{2}{l}{Alternator / electric motor operation}\\
+\begin{tabular}{@{}ll@{}}
+Ohm's law                                                 &  $R = \dfrac{U}{I}$            \\
+Components in series                                      &  equal current                 \\
+Components in parrallel                                   &  equal voltage                 \\
+Power                                                     &  $P = U \cdot I = I^2 \cdot R$ \\
+\multicolumn{2}{l}{Alternator / electric motor operation} \\
 \end{tabular}
 
 \newpage
@@ -68,7 +71,7 @@ The current through an LED can usually only be \SI{20}{\milli\ampere}. The volta
 
 
 \marginfigure[\baselineskip]{8. Circuit switchable LED}
-\begin{enumerate}
+\begin{alphalist}
 \item There is no resistor with \SI{150}{\ohm}, but there is one of \SI{220}{\ohm}. Look up the resistor with the help of the color code: the first ring must be red, the second ring also and the third ring brown ($\textcolor{red}{2}\textcolor{red}{2} \cdot \textcolor{brown}{10}$). Another possibility is red, red, black, black ($\textcolor{red}{2}\textcolor{red}{2}\textcolor{black}{0} \cdot \textcolor{black}{1}$).
 
 \item Now connect the \SI{5}{\volt} output of the Arduino to the + column and the GND (ground) output of the Arduino to the - column.
@@ -76,15 +79,15 @@ The current through an LED can usually only be \SI{20}{\milli\ampere}. The volta
 \item Connect the LED and the resistor in series, see the drawing.
 
 \item Connect the Arduino to the computer via the USB. If you did it correctly, the LED will light!
-\end{enumerate}
+\end{alphalist}
 
 Because the red LED emits light at a lower voltage than, for example, a green LED, you can use a smaller resistance for green and blue LEDs. In this way they burn just as brightly!
 
 \begin{tabular}{ll}
-\textbf{Colour} & \textbf{Threshold voltage}\\
-Blue & \SI{2.3}{\volt} \\ 
-Green & \SI{2.0}{\volt} \\
-Red  & \SI{1.5}{\volt} \\
+\textbf{Colour} & \textbf{Threshold voltage} \\
+Blue            & \SI{2.3}{\volt}            \\
+Green           & \SI{2.0}{\volt}            \\
+Red             & \SI{1.5}{\volt}            \\
 \end{tabular}
 
 \begin{minipage}[t]{\linewidth}
@@ -99,13 +102,13 @@ Red  & \SI{1.5}{\volt} \\
 
 Now you can light your LED, but that won't be of much use to you yet\dots The next step is to control the LED using a piece of code. To control the LED using code you need to connect an output port (for example pin 13) of the Arduino to your LED. You don't need the \SI{5}{\volt} output now, pin 13 now supplies the voltage. In the drawing you can see that the \SI{5}{\volt} output is still connected. With larger projects you quickly forget the \SI{5}{\volt}, that's why it's smart to always connect it!
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the setup you see in the drawing and connect the Arduino to the computer.
-\end{enumerate}
+\end{alphalist}
 
 We want to control the Arduino, we use the Arduino program for that.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Open the program and open the script blink via: file / examples / base / blink.
 
 \item Check the script with the check mark. If the program does not work, it will display an error message at the bottom (you may have to assign the COM port, you do this via tools / port).
@@ -119,28 +122,19 @@ We want to control the Arduino, we use the Arduino program for that.
 \item Connect three different LED lights, change the script so that they turn on sequentially.
 
 \item Change the script and create a traffic light with orange on for a short time.
-\end{enumerate}
+\end{alphalist}
 
 \newpage
 
-\newlength{\biggraphicwithtext}
-\setlength{\biggraphicwithtext}{\dimexpr(\textwidth+65mm)\relax}
-\newlength{\textwidthnexttobiggraphic}
-\setlength{\textwidthnexttobiggraphic}{\dimexpr(\biggraphicwithtext-120mm)\relax}
-% \newlength{\biggraphic}
-% \setlength{\biggraphic}{\dimexpr(\biggraphicwithtext-10mm)\relax}
-\begin{minipage}{\biggraphicwithtext}
-\begin{minipage}{\textwidthnexttobiggraphic}
-\section{Programming part 1}\vspace{\baselineskip}
+\begin{widebox}
+    \begin{leftrightbox}[0.4]{\includegraphics[width=\linewidth]{12. Arduino code}}
+    \section{Programming part 1}
 
-Arduino has its own programming language based on C++. If you already have experience with programming and/or with C++ (or Java), programming is very easy. And if you have no experience with programming? It's much less difficult than you might think! \vspace{\baselineskip}
+    Arduino has its own programming language based on C++. If you already have experience with programming and/or with C++ (or Java), programming is very easy. And if you have no experience with programming? It's much less difficult than you might think!
 
-At the top of the script Blink the first character is /*, which means that everything after this starting character and before the closing character */ is commented out. The code in between these characters is ignored by the program. Here you put the name of the program, what it does, who made it and when you last changed it.
-\end{minipage}\hfill\begin{minipage}{12cm}
-\raggedleft
-\includegraphics[width=11cm]{12. Arduino code}
-\end{minipage}
-\end{minipage}
+    At the top of the script Blink the first character is /*, which means that everything after this starting character and before the closing character */ is commented out. The code in between these characters is ignored by the program. Here you put the name of the program, what it does, who made it and when you last changed it.
+    \end{leftrightbox}
+\end{widebox}
 
 \smallskip
 
@@ -172,7 +166,7 @@ The pin is controlled with a high or a low signal. Is there anything else in bet
 
 \marginfigure[\baselineskip]{14. Circuit dimmable LED}
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the setup on the right. Use a PWM pin for the output, for example Pin 9 (note, the LED does not need to be connected to the constant voltage, the voltage is now supplied by pin 9).
 
 \item Open the script Fade in the examples / base and upload the script.
@@ -182,7 +176,7 @@ The pin is controlled with a high or a low signal. Is there anything else in bet
 \item Change the code so that the LED lights up faster and is off faster. Note, there are two ways! Try them both.
 
 \item \lstinline{analogWrite} is used in the code. Previously we used \lstinline{digitalWrite}. Explain why this is not possible now.
-\end{enumerate}
+\end{alphalist}
 
 \subsection{Assignment 4 An on and off button for the LED}
 
@@ -190,19 +184,19 @@ The pin is controlled with a high or a low signal. Is there anything else in bet
 
 We can now turn the LED on and off with the help of the code and even dim it. But often you also want to be able to switch a circuit on and off manually. We need a push button for that.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the circuit on the right. Make sure you use a large resistor so that the supplied current is limited, because an Arduino is bad at supplying large currents.
-\end{enumerate}
+\end{alphalist}
 
 The idea is now that we use pin 2 as INPUT. Pin 2 measures the voltage at that point (compares it with \SI{0.0}{\volt}). This is done with the code \lstinline{digitalRead()}. It can now measure a high (\SI{5.0}{\volt}) or low (\SI{0.0}{\volt}) signal. With an analog pin such as A0 to A5, intermediate volages can also be measured, with 10-bit resolution. Pin 2 should only measure a voltage when the button is pressed.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Open the Button script via examples / digital and upload the script.
 
 \item Press the button and check when the LED is off and when it is on.
 
 \item Adjust the script so that the function of the button is reversed.
-\end{enumerate}
+\end{alphalist}
 
 \marginfigure[-\baselineskip]{16. Button bounce}
 
@@ -331,11 +325,11 @@ Depending over which range your sensor should be sensitive determines the choice
 
 The circuit is very similar to Assignment 4. Only now we use an LDR and an ANALOG IN.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the circuit.
 
 \item Open the analogReadSerial  script: examples / base / Analogreadserial.
-\end{enumerate}
+\end{alphalist}
 
 The most important code can be found below.
 
@@ -351,7 +345,7 @@ The Arduino is instructed to read out the analog port (\lstinline{analogRead (A0
 
 Next we want to know this value. The value is then also printed for us (\lstinline{Serial.println (sensorValue);}), which can be read using the serial monitor (the magnifying glass at the top right). For stability it is good to build in a \lstinline{delay}.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Upload the script to the Arduino and read the values ​​using the Serial Monitor.
 
 \item Cover the LDR with your hand. Does the given value change?
@@ -363,7 +357,7 @@ Next we want to know this value. The value is then also printed for us (\lstinli
 \item Using graph 2, explain that a large value of $ R_{\si{\ohm}} $ makes the LDR almost equally sensitive throughout the range.
 
 \item Think of a way to calibrate the sensor yourself. So let the sensor itself determine the minimum and maximum value.
-\end{enumerate}
+\end{alphalist}
 
 
 \subsection{Assignment 9 Measure response time}
@@ -427,16 +421,16 @@ The potentiometer has three legs. One for the \SI{5.0}{\volt} in, one for the ea
 
 When you turn the rotary knob of the potentiometer, the resistance changes, which also changes the value of the voltage that you read out. A potentiometer is actually a voltage divider.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the circuit.
 
 \item Write the corresponding code, first reading out the value of the potentiometer and then controlling the RGB LED.
 
 \item Try the different positions of the RGB LED and check if the picture below corresponds well with the colors of the LED.
-\end{enumerate}
+\end{alphalist}
 
 \begin{center}
-\includegraphics[width=5cm]{26. Mixing colours}
+\includegraphics[width=0.5\linewidth]{26. Mixing colours}
 \end{center}
 
 \newpage
@@ -449,7 +443,7 @@ When you turn the rotary knob of the potentiometer, the resistance changes, whic
 
 An electric motor converts electrical energy into kinetic energy. You will find an electric motor in all devices that move and work on electricity. The speed of an electric motor depends on the voltage across the motor. In this lesson we will work with the PWM pin ($\sim$). We can of course directly enter the speed of the electric motor in our script, but it would be more convenient if we could adjust the speed of the electric motor manually, for example using a rotary knob. We are going to use a variable resistor, also called a potentiometer.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the right side of the circuit with the potentiometer. You don't have to connect the electric motor yet.
 
 \item Explain why the signal out of the potentiometer should go to ANALOG IN.
@@ -457,10 +451,10 @@ An electric motor converts electrical energy into kinetic energy. You will find 
 \item Explain why the diode is included in the circuit.
 
 \item Program the accompanying script so that the speed of rotation of the electric motor can be set using the potentiometer. Use the map function for this.
-\end{enumerate}
+\end{alphalist}
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{29. Circuit motor control}
+\includegraphics[width=0.8\linewidth]{29. Circuit motor control}
 \end{center}
 
 \newpage
@@ -483,11 +477,11 @@ With very high currents you have to use a larger transistor or one with a coolin
 
 The circuit of assignment 13 is too simple and the Arduino may well be supplying too little current. Especially when you want to run the DC motor quickly.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the circuit as shown below.
 
 \item Use the script from assignment 12 and upload the program. Can the electric motor actually turn faster?
-\end{enumerate}
+\end{alphalist}
 
 \begin{center}
 \includegraphics[width=0.8\linewidth]{33. Circuit motor control (large current)}
@@ -533,7 +527,7 @@ All solar panels are set up on a large field, such as solar panel 1. Solar panel
 \marginfigure{36. Circuit solar panel control}
 Instead of a solar cell, we start with an LDR.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Build the circuit and program the first piece where you can read the values ​​of the LDR.
 
 \item Turn on the flash of your phone and read using \lstinline{Serial.println(LDR1);} the values ​​of LDR 1 and LDR2. Move your phone from left to right and watch the values ​​vary.
@@ -541,25 +535,24 @@ Instead of a solar cell, we start with an LDR.
 \item Now write the piece of code for the servo. Turn the servo to the left if LDR1 receives more light than LDR2 and vice versa. Keep in mind that the servo uses a potentiometer and you can also use the map function.
 
 \item Explain that it is already quite close to rotating the solar panels.
-\end{enumerate}
+\end{alphalist}
 
-\begin{minipage}{\widemargin}
+\begin{widebox}
 \subsection{Assignment 17 LCD}
 
 With an LCD screen (liquid crystal display) it is possible to print information on a small screen. This eliminates the need to use the serial monitor (and computer) to read data.\vspace{\baselineskip}
 
-\begin{minipage}{\textwidth}
-\centering
-\includegraphics[width=0.7\textwidth]{37. Circuit display}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.7\linewidth]{37. Circuit display}
 \end{minipage}
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Create the setup shown here.
 
 \item Open the program HelloWorld, it can be found at File / examples / LiquidCrystal and upload the program. Note! With HelloWorld your backlight is not yet on, you can control this using pin 7 (and insert the piece of code). You can also always have the backlight on by not connecting to pin 7 but to the +.
 
 \item Try to read the script and see if you understand what the LCD shows.
-\end{enumerate}
+\end{alphalist}
 
 The script uses a library. A library is a piece of code written by others, which makes programming a lot easier for you. Libraries have already been made for many different sensors, so it is only a matter of finding them. This often works through, for example: \href{instructables.com}{instructables.com} or \href{arduino.cc}{arduino.cc}. All possible functions for this specific library can be found at: \href{arduino.cc/en/reference/LiquidCrystal}{https://www.arduino.cc/en/reference/LiquidCrystal}
 
@@ -567,22 +560,27 @@ Let's take a look at the script: after reading the library, we should specify th
 
 Over time, the time the Arduino is on (\lstinline{millis ();}) is printed to the LCD, to line 2.
 
-\begin{enumerate}[label={\alph*})]
+\begin{alphalist}
 \item Expand your circuit with a push button and change the code so that the LCD screen shows how many times you pressed the button.
-\end{enumerate}
-\end{minipage}
+\end{alphalist}
+\end{widebox}
 
 \newpage
 
 \section{Functions}
 
-\begin{minipage}{\widemargin}
+\begin{widebox}
 There is a huge list of features. What follows are the most common functions that are used in Arduino.
 
-\begin{longtable}{p{0.22\textwidth}p{0.74\textwidth}}
+\newlength{\functionsCOLi}\setlength{\functionsCOLi}{\widthof{\lstinline[]!map(W,Min1,Max1,Min2,Max2)!}}
+\begin{longtable}{
+    >{\raggedright\arraybackslash}p{\functionsCOLi}
+    >{\raggedright\arraybackslash}p{\linewidth-\functionsCOLi-4\tabcolsep}
+    }
 \toprule
 \textbf{Function} & \textbf{Explanation} \\
-\midrule\endhead
+\midrule
+\endhead
 \midrule \multicolumn{2}{r}{{\scriptsize\textit{Continues on the next page}}} \\ \bottomrule
 \endfoot
 \bottomrule
@@ -634,7 +632,7 @@ Wait a few milliseconds for the next piece of code to run. \\
 {\lstinline[]!random(min,max)!} &
 Random returns a number between the lowest value ({\lstinline[]!min!}) and highest value ({\lstinline[]!max!}). A disadvantage of random is that the same sequence is played when the Arduino is restarted. Random is not random\dots. This problem can be solved by first using the {\lstinline[]!randomSeed(analogRead(0));!} function. This reads pin A0. If nothing is connected there, noise is measured here. randomSeed shakes up Random's fixed sequence, as it were.\\
 \end{longtable}
-\end{minipage}
+\end{widebox}
 
 \bigskip
 
