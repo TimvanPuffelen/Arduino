@@ -6,7 +6,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}%[2018/04/01]
-\ProvidesClass{arduino}[2021/03/16 v0.3 LaTeX class for Boswell Arduino documents]%
+\ProvidesClass{arduino}[2021/03/19 v0.4 LaTeX class for Boswell Arduino documents]%
 \LoadClass[oneside]{article}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \RequirePackage{ifxetex}
@@ -14,6 +14,7 @@
     \RequirePackage{calc}
     \RequirePackage{changepage}
     \RequirePackage{environ}
+    \RequirePackage{tikz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Layout
     \RequirePackage{geometry}
@@ -35,7 +36,19 @@
     \setlength{\widemargin}{\paperwidth-\Margin-\Margin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sectioning
+    \usepackage{sectsty}
     \setcounter{secnumdepth}{0}
+    \sectionfont{\color{Arduino}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Running headers
+    \RequirePackage{fancyhdr}
+    \fancypagestyle{plain}{\fancyhf{}
+        \renewcommand{\headrulewidth}{0pt}
+        \renewcommand{\footrulewidth}{0pt}
+        \fancyhfoffset[R]{\RM+\RMsep}
+        \rfoot{\small\thepage}
+    }
+    \pagestyle{plain}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Fonts
     \RequirePackage{anyfontsize}
@@ -48,6 +61,7 @@
     \RequirePackage{xcolor}
     \RequirePackage{listings}
     %%% Define Custom IDE Colors %%%
+    \definecolor{Arduino}{HTML}{15415a}
     \definecolor{arduinoGreen}    {rgb} {0.17, 0.43, 0.01}
     \definecolor{arduinoGrey}     {rgb} {0.47, 0.47, 0.33}
     \definecolor{arduinoOrange}   {rgb} {0.8 , 0.4 , 0   }
@@ -122,12 +136,13 @@
     \setlength\marginlstoffset{\dimexpr2mm+3pt+2pt\relax}
     \lstnewenvironment{marginlisting}
       {%
-        \lstset{style=myArduino ,
+        \lstset{style=myArduino,
           % basicstyle = \small\ttfamily,
           % frame = leftline ,
           % framerule = 2mm ,
           % rulecolor = \color{black!20},
-          breaklines = true ,
+          basicstyle=\ttfamily\small,
+          breaklines = true,
           linewidth = \dimexpr\marginparwidth-\marginlstoffset\relax
         }%
         \setbox\marginlst\hbox\bgroup
@@ -138,15 +153,17 @@
         \marginpar{\hspace*{\marginlstoffset}\unhbox\marginlst}%
       }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphicx
+    \RequirePackage{graphicx}
+    \graphicspath{{images/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Other packages
     \RequirePackage{amsmath}
-    \RequirePackage{graphicx}
     \RequirePackage{booktabs}
     \RequirePackage{longtable}
     \RequirePackage{siunitx}
     \RequirePackage{enumitem}
     \RequirePackage{wrapfig}
-    \RequirePackage{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Widebox
     \newenvironment{widebox}{\begin{adjustwidth}{0pt}{-\RM-\RMsep}\raggedright}{\end{adjustwidth}}
@@ -167,7 +184,40 @@
     \RequirePackage{mparhack}
     \NewDocumentCommand{\marginfigure}{O{0pt} O{1} m}{\marginpar{\vspace{#1}\centering\includegraphics[width=#2\linewidth]{#3}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \AfterEndPreamble{\raggedright}
+% DATA definitions
+    \newcommand{\dbDATA}[2]{\csdef{db#1}{#2}\csdef{DATA#1}##1{\csgdef{db#1}{##1}}}
+    \newcommand{\usedb}[1]{\csuse{db#1}}
+    \newcommand{\DATA}[2]{\csuse{DATA#1}{#2}}
+    \dbDATA{author}{Ir. C.F.J. Pols}
+    \dbDATA{title}{Arduino}
+    \dbDATA{subtitle}{Project based electronics \& programming teaching}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cover page
+    \newcommand{\COVERPAGE}{\thispagestyle{empty}\strut
+        \begin{tikzpicture}[remember picture,overlay,every node/.style={rectangle,inner sep=0pt,anchor=north east}]
+            \node[scale=6,Arduino] (title)    at ([shift={(-\Margin,-\Margin)}]current page.north east) {\strut\usedb{title}};
+            \node[text width={\paperwidth-2*\Margin},align=right,fill=Arduino,text=white,font=\LARGE] (subtitle) at ([shift={(0pt,-5pt)}]title.south east) {\strut\usedb{subtitle}};
+            \node[scale=3] (author)   at ([shift={(0pt,-20pt)}]subtitle.south east) {\strut\usedb{author}};
+            \node[anchor=east] (img) at ([shift={(-\Margin,0pt)}]current page.east) {\includegraphics{./logos/arduino}};
+            \node[anchor=south west] (BB)    at ([shift={(\Margin,\Margin)}]current page.south west) {\includegraphics[height=3cm]{./logos/bb}};
+            \node[anchor=south east] (SPOON) at ([shift={(-\Margin,\Margin)}]current page.south east) {\includegraphics[height=3cm]{./logos/spoon}};
+        \end{tikzpicture}
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TOC
+    \RequirePackage[titles]{tocloft}
+    \setcounter{tocdepth}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \AfterEndPreamble{\raggedright
+        \COVERPAGE
+        \clearpage
+        \tableofcontents
+        \clearpage
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperref
+    \RequirePackage{xurl}
+    \RequirePackage[hidelinks]{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \endinput
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
